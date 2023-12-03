@@ -5,7 +5,7 @@
 	<title>Опросник</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="module" src="index.ts"></script>
+	<script type="module" src="src/index.ts"></script>
 	<style>
 		:root {
 			--black: #111111;
@@ -310,7 +310,8 @@
 				<section>
 					<slot name="name">СЛУЧИЛАСЬ ЧУДОВИЩНАЯ ОШИБКА</slot>
 					<slot name="questions">Грузимся</slot>
-					<button id="add-question" type="button" style="view-transition-name: add-question-button;">+</button>
+					<button id="add-question" type="button"
+						style="view-transition-name: add-question-button;">+</button>
 				</section>
 				<button style="height: min-content;" type="submit">Отправить</button>
 			</form>
