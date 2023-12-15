@@ -14,13 +14,15 @@ export class SurveyId implements Renderable {
             id.className = "survey-link";
             surveyId.appendChild(id);
         }
+
+        setTimeout(() => 
         navigator.clipboard.writeText(link).then(() => {
             const link = document.createElement("span");
             link.slot = "copied";
             link.appendChild(document.createTextNode("Ссылка уже в вашем буфере обмена"));
             link.className = "copied-text";
             surveyId.appendChild(link);
-        });
+        }), 0);
 
         return surveyId;
     }
