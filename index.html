@@ -28,6 +28,7 @@
 			background-color: var(--white);
 			color: var(--black);
 			min-height: 100dvh;
+			overflow-x: hidden;
 		}
 
 		div#root {
@@ -56,7 +57,8 @@
 		}
 
 		t-login,
-		t-survey-namer {
+		t-survey-namer,
+		t-survey-id {
 			height: 100dvh;
 			display: flex;
 			flex-direction: column;
@@ -64,6 +66,14 @@
 
 		.center {
 			justify-content: center;
+		}
+
+		.copied-text {
+			color: gray;
+		}
+
+		.survey-link {
+			font-size: 2em;
 		}
 	</style>
 </head>
@@ -337,8 +347,122 @@
 				border-radius: 0 0 20px 20px;
 			}
 		</style>
-		<input type="text" minlength=1 id="name" />
+		<input required type="text" minlength="1" id="name" />
 		<textarea disabled rows="5">Поле для ответа</textarea>
+	</template>
+	<template id="survey-id">
+		<style>
+			* {
+				margin-top: 0px;
+			}
+
+			main {
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				flex-wrap: wrap;
+				flex-grow: 1;
+				justify-content: center;
+				align-content: center;
+			}
+		</style>
+		<header is="t-header"></header>
+		<main>
+			<h1>Ваш опрос был создан</h1>
+			<p>Ссылка на ваш опрос:</p>
+			<slot name="link">Тут должна быть ссылка</slot>
+			<slot name="copied"></slot>
+		</main>
+	</template>
+	<template id="take-survey">
+		<style>
+			* {
+				margin-top: 0px;
+			}
+
+			main {
+				display: flex;
+				flex-direction: column;
+				flex-wrap: wrap;
+				flex-grow: 1;
+				padding: 20px;
+			}
+
+			form {
+				display: flex;
+				flex-direction: row;
+				gap: 30px;
+				flex-grow: 1;
+
+				& section {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-content: center;
+					gap: 20px;
+					flex-grow: 1;
+					text-align: center;
+				}
+			}
+
+			input,
+			button {
+				border-radius: 20px;
+				padding: 10px 20px;
+				color: inherit;
+				font-size: 24px;
+				background-color: inherit;
+				border-style: solid;
+				border-color: var(--black);
+				transition-property: background-color, box-shadow;
+				transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+				transition-duration: 150ms;
+
+				&:focus {
+					box-shadow: inset 0px 0px 2px 2px var(--black);
+				}
+
+			}
+
+			button {
+				cursor: pointer;
+
+				&:hover {
+					background-color: gray;
+				}
+			}
+		</style>
+		<header is="t-header"></header>
+		<main>
+			<form>
+				<section>
+					<slot name="name">СЛУЧИЛАСЬ ЧУДОВИЩНАЯ ОШИБКА</slot>
+					<slot name="questions">Грузимся</slot>
+				</section>
+				<button style="height: min-content;" type="submit">Отправить</button>
+			</form>
+		</main>
+	</template>
+	<template id="ender">
+		<style>
+			* {
+				margin-top: 0px;
+			}
+
+			main {
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				flex-wrap: wrap;
+				flex-grow: 1;
+				justify-content: center;
+				align-content: center;
+			}
+		</style>
+		<header is="t-header"></header>
+		<main>
+			<h1>Спасибо за прохождение опроса</h1>
+		</main>
 	</template>
 	<div id="root"></div>
 </body>

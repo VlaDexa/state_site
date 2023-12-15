@@ -3,6 +3,15 @@ import Login from "./Login";
 import Survey from "./Survey";
 import { Renderable, changePage } from "./utils";
 
+type CreateData = {
+    created_at: string,
+    id: string,
+    created_by: string,
+    name: string,
+    expire_at: string,
+    questions: never[]
+}
+
 export default class SurveyNamer implements Renderable {
     constructor() { }
 
@@ -32,7 +41,8 @@ export default class SurveyNamer implements Renderable {
                 body: `{"name":"${name}","expire_at":"${expire}"}`
             });
             if (req.status !== 200) return alert("Error at creation");
-            changePage(Survey, name.toString());
+            const create_data = await req.json() as CreateData;
+            changePage(Survey, create_data.name, create_data.id);
         };
         return namer;
     }
